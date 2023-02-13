@@ -14,3 +14,11 @@ and libraries, found in e.g. the libxml2-dev and libudev-dev packages
 
 With these installed run:
   make
+
+Mac OS user:
+  brew install libusb pkg-config
+  make
+
+or use cmake:
+  cmake .
+  make
