@@ -1,27 +1,17 @@
 OUT := qdl
 
-CFLAGS := -O2 -Wall -g `pkg-config --cflags libxml-2.0`
-LDFLAGS := `pkg-config --libs libxml-2.0 libudev`
+CFLAGS := -O2 -Wall -g `xml2-config --cflags` `pkg-config --cflags libusb-1.0`
+LDFLAGS := `xml2-config --libs` `pkg-config --libs libusb-1.0`
 prefix := /usr/local
 
 SRCS := firehose.c qdl.c sahara.c util.c patch.c program.c ufs.c
 OBJS := $(SRCS:.c=.o)
 
-KS_OUT := ks
-KS_SRCS := ks.c sahara.c util.c
-KS_OBJS := $(KS_SRCS:.c=.o)
-
-default: $(OUT) $(KS_OUT)
-
 $(OUT): $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS)
-
-$(KS_OUT): $(KS_OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 clean:
 	rm -f $(OUT) $(OBJS)
-	rm -f $(KS_OUT) $(KS_OBJS)
 
 install: $(OUT)
-	install -D -m 755 $< $(DESTDIR)$(prefix)/bin/$<
+	install -m 755 $< $(DESTDIR)$(prefix)/bin/$<

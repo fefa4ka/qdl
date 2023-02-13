@@ -87,6 +87,7 @@ unsigned attr_as_unsigned(xmlNode *node, const char *attr, int *errors)
 
 	value = xmlGetProp(node, (xmlChar*)attr);
 	if (!value) {
+        printf("No unsigned value for %s\n", attr);
 		(*errors)++;
 		return 0;
 	}
@@ -100,6 +101,7 @@ const char *attr_as_string(xmlNode *node, const char *attr, int *errors)
 
 	value = xmlGetProp(node, (xmlChar*)attr);
 	if (!value) {
+        printf("No string value for %s\n", attr);
 		(*errors)++;
 		return NULL;
 	}

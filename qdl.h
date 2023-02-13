@@ -5,12 +5,13 @@
 
 #include "patch.h"
 #include "program.h"
+#include <libusb.h>
 #include <libxml/tree.h>
 
 #define MAPPING_SZ 64
 
 struct qdl_device {
-        int fd;
+        libusb_device_handle *handle;
 
         int in_ep;
         int out_ep;
